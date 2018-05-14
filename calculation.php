@@ -71,10 +71,8 @@ function decision(){
 
 function checkExist(){
     global $product_id;
-    print $product_id;
     for ($i = 1; $i < count($_SESSION['the_table']->table); $i++){
         if ($product_id == $_SESSION['the_table']->table[$i][0]){
-            echo "exist";
             return array(true,$i);
             }
         }
