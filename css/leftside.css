@@ -1,0 +1,16 @@
+#l2_milk {
+    position:absolute;
+    left:100px;
+    top:144px;
+}
+#l2_other{
+    position: absolute;
+    left:170px;
+    top:144px;
+}
+
+#T_bone{
+    position: absolute;
+    top: 144px;
+    left: 0px;
+}
