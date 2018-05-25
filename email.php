@@ -17,8 +17,9 @@ class Table{
 }
 $address = $_POST['email'];
 $subject = "Grocery Confirmation";
-$message = "";
-$message .= '<table>';
+$message = '<html>';
+$message ='<body>';
+$message .= '<table border="1">';
 foreach ($_SESSION['the_table']->table as $row1){
     $message .= "<tr>";
     foreach($row1 as $cell){
@@ -26,10 +27,13 @@ foreach ($_SESSION['the_table']->table as $row1){
     }
     $message .= "</tr>";
 }
-$message .= '</table>';
+$message .= '</table></br>';
 $message .= 'the total price is  ';
 $message .= $_SESSION['all_total'];
+$message .='</body>';
+$message .='</html>';
 mail($address,$subject,$message);
+print ($message);
     ?>
 <html>
 <head>

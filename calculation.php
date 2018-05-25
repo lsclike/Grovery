@@ -58,11 +58,15 @@ function decision(){
     table_exist();
     $_SESSION['all_total'] += $theProductTotal;
     print ($_SESSION['all_total']);
-        if (checkExist()[0]){
+    $veri = checkExist();
+        if ($veri[0]){
             echo "down to exist";
-            $therow = checkExist()[1];
-            $_SESSION['the_table']->table[$therow][2] += $product_num;
-            $_SESSION['the_table']->table[$therow][3] += $theProductTotal;
+            $therow = ($veri[1]);
+            $thetable = $_SESSION['the_table']->table;
+            $thetable[$therow][2] += $product_num;
+            $thetable[$therow][3] += $theProductTotal;
+            $_SESSION['the_table']->table = $thetable;
+//            $_SESSION['the_table']->table[$therow][3] += $theProductTotal;
         }
         else{
             $_SESSION['the_table']->add_row(array($row['product_id'],$row['product_name'],$product_num,$theProductTotal));
@@ -72,13 +76,13 @@ function decision(){
 function checkExist(){
     global $product_id;
     print $product_id;
+    $thetable = $_SESSION['the_table']->table;
     for ($i = 1; $i < count($_SESSION['the_table']->table); $i++){
-        if ($product_id == $_SESSION['the_table']->table[$i][0]){
-            echo "exist";
+        if ($product_id == $thetable[$i][0]){
             return array(true,$i);
             }
         }
-        return false;
+        return array(false,-1);
 }
 
 function table_exist(){
@@ -110,7 +114,6 @@ foreach ($_SESSION['the_table']->table as $row1){
 </table>
 <table >
         <tr>
-
                 <td><form action="calculation.php"  method="post" target="bottom_right" >
                     <input type="submit" name="clear" value="clear" onClick="{if(confirm('Do you want to clear your shopping cart?')) {return true} return false;}">
                 </form></td>
@@ -119,7 +122,6 @@ foreach ($_SESSION['the_table']->table as $row1){
                 </form>
                 </td>
         </tr>
-    //TODO put button on the bottom right
 
 </table>
 </body>
